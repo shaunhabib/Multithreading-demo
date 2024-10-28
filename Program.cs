@@ -54,7 +54,7 @@
 
 #region Multi threading demo 2
 //Thread t1 = new Thread(MethodT1);
-//Thread t2 = new Thread(() => MethodT2(false));
+//Thread t2 = new Thread(() => MethodT2(true));
 //Thread t3 = new Thread(MethodT3);
 
 //t1.Start();
@@ -62,6 +62,21 @@
 //t3.Start();
 #endregion
 
+#region Thread on non-void method
+//Thread t1 = new Thread(MethodT1);
+
+//Thread t2 = new Thread(() =>
+//{
+//    var task = ReturnableMethod();
+//    Console.WriteLine($"Result from thread: {task}");
+//});
+//t2.Start();
+//t1.Start();
+//t2.Join();
+//=>thread.Join() is used to wait for the thread to finish
+#endregion
+
+Console.ReadLine();
 
 //=======Thread=========
 //Threads are lightweight processes
@@ -70,7 +85,6 @@
 //Threads are executed simultaneously
 //Threads are executed by operating system using time-sharing. Means some times for thread 1 some times for thread 2 etc
 
-Console.ReadLine();
 
 
 void Method1()
@@ -105,7 +119,7 @@ void Method3()
 
 void MethodT1()
 {
-    for (int i = 1; i <= 20; i++)
+    for (int i = 1; i <= 200; i++)
     {
         Console.WriteLine($"MethodT1 = {i}");
     }
@@ -113,7 +127,7 @@ void MethodT1()
 
 void MethodT2(bool takeSleep)
 {
-    for (int i = 1; i <= 20; i++)
+    for (int i = 1; i <= 200; i++)
     {
         Console.WriteLine($"MethodT2 == {i}");
 
@@ -127,8 +141,14 @@ void MethodT2(bool takeSleep)
 
 void MethodT3()
 {
-    for (int i = 1; i <= 20; i++)
+    for (int i = 1; i <= 200; i++)
     {
         Console.WriteLine($"MethodT3 === {i}");
     }
+}
+
+int ReturnableMethod()
+{
+    Thread.Sleep(2000);
+    return 1;
 }
